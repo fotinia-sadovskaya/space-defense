@@ -33,16 +33,6 @@ function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   player.updateBullets();
   player.draw();
-
-  asteroids.forEach((asteroid, index) => {
-    asteroid.move();
-    asteroid.draw();
-  
-    if (asteroid.y > canvas.height) {
-      asteroids.splice(index, 1); // Видалити, якщо вийшов за межі
-    }
-  });
-
   requestAnimationFrame(gameLoop);
 }
 

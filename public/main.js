@@ -52,9 +52,16 @@ function gameLoop() {
     if (bullet.isOutOfScreen()) {
       bullets.splice(index, 1);
     }
-  });
 
-  checkCollisions(); // 🔥 Додаємо перевірку попадань
+    asteroids.forEach((asteroid, index) => {
+      asteroid.move();
+      asteroid.draw();
+    
+      if (asteroid.y > canvas.height) {
+        asteroids.splice(index, 1); // Видалити, якщо вийшов за межі
+      }
+    });    
+  });
 
   //✅ Рухаємо та малюємо всіх ворогів
   enemies.forEach((enemy, index) => {
@@ -100,7 +107,21 @@ function checkCollisions() {
       }
     });
   });
+
+  // Перевірка для астероїдів
+bullets.forEach((bullet, bulletIndex) => {
+  asteroids.forEach((asteroid, asteroidIndex) => {
+    if (collisionDetected(asteroid, bullet)) {
+      console.log("💥 Влучення в астероїд!");
+      explodeProjectile(bullet.x, bullet.y);
+      bullets.splice(bulletIndex, 1);
+      asteroids.splice(asteroidIndex, 1);
+    }
+  });
+});
 }
+
+checkCollisions(); // 🔥 Додаємо перевірку попадань
 
 // Функція для вибуху снаряда
 function explodeProjectile(x, y) {
