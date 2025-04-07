@@ -1,12 +1,14 @@
 import Enemy from "./enemy.js";
 import Player from "./player.js";
 import Bullet from "./bullet.js";
+import Asteroid from "./asteroid.js";
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 const bullets = []; // ✅ Масив для збереження снарядів
 const enemies = []; // Масив для ворогів
+const asteroids = []; // новий масив для астероїдів
 const player = new Player(canvas, bullets); // Передаємо bullets у Player ✅ Створюємо гравця
 
 console.log("👾 Всі вороги:", enemies);
@@ -23,6 +25,14 @@ function spawnEnemy() {
   });
 }
 setInterval(spawnEnemy, 2000); // ✅ Спавнимо ворога кожні 2 секунди
+
+function spawnAsteroid() {
+  const x = Math.random() * (canvas.width - 60);
+  const speed = 1 + Math.random() * 2;
+  asteroids.push(new Asteroid(canvas, x, -60, speed));
+}
+
+setInterval(spawnAsteroid, 3500); // Спавн кожні 3.5 сек
 
 // 🎮 Головний ігровий цикл
 
