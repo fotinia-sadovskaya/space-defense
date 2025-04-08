@@ -4,6 +4,16 @@ import Bullet from "./bullet.js";
 import Asteroid from "./asteroid.js";
 import { updateScore, updateHighScoreUI } from "./utils/score.js";
 
+// Якщо треба показувати щось на екрані
+import { isMuted } from "./utils/store.js";
+import { toggleSound } from "./utils/store.js";
+import { buyUpgrade } from "./utils/store.js";
+import { addCoins } from "./utils/store.js";
+
+//import { updateStoreUI } from "./ui.js";
+//import { updateHUD } from "./ui.js";
+//import { sendScore } from "./socket-client.js";
+
 document.body.addEventListener("htmx:afterSwap", (e) => {
   if (
     e.detail.target.id === "hud-container" ||
@@ -176,6 +186,22 @@ function handleEnemyDestroyed() {
   updateScore(currentScore);
   updateHighScoreUI();
 }
+
+// function updateStoreUI() {
+//   const store = document.getElementById("store");
+//   const coins = store.querySelector(".coins");
+//   const upgrades = store.querySelectorAll(".upgrade");
+//   coins.textContent = getStore().coins;
+//   upgrades.forEach((upgrade) => {
+//     const name = upgrade.dataset.name;
+//     const price = getStore().upgrades[name].price;
+//     const bought = getStore().upgrades[name].bought;
+//     upgrade.querySelector(".price").textContent = price;
+//     upgrade.querySelector(".bought").textContent = bought ? "✓" : "✗";
+//   });
+// }
+
+//updateStoreUI();
 
 // function explodeProjectile(x, y) {
 //   const explosion = new Image();
