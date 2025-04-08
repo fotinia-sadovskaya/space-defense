@@ -59,6 +59,13 @@ body {
   color: lightcoral;
 }
 
+.hud__weapon::before,
+.hud__score::before,
+.hud__highscore::before,
+.hud__players::before {
+  margin-right: 5px;
+}
+
 .explosion {
   position: absolute;
   width: 50px;

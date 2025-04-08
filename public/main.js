@@ -10,9 +10,40 @@ import { toggleSound } from "./utils/store.js";
 import { buyUpgrade } from "./utils/store.js";
 import { addCoins } from "./utils/store.js";
 
-//import { updateStoreUI } from "./ui.js";
+import { isUpgradeOwned } from "./utils/store.js";
+import { getStore } from "./utils/store.js";
+
 //import { updateHUD } from "./ui.js";
 //import { sendScore } from "./socket-client.js";
+
+import { updateStoreUI } from "./ui.js";
+
+document.body.addEventListener("htmx:afterSwap", (e) => {
+  const target = e.detail.target;
+
+  if (target && target.classList.contains("store")) {
+    console.log("🛒 Магазин оновлено через HTMX");
+    updateStoreUI();
+  }
+
+  if (target && target.classList.contains("hud")) {
+    updateHUD(); // якщо у тебе є така функція
+  }
+});
+
+// Додати обробник події для закриття магазину
+document.addEventListener("keydown", (e) => {
+  if (e.code === "KeyM") {
+    fetch("partials/ui-store.partial.html")
+      .then((res) => res.text())
+      .then((html) => {
+        const div = document.createElement("div");
+        div.innerHTML = html;
+        document.body.appendChild(div.firstElementChild);
+        updateStoreUI();
+      });
+  }
+});
 
 document.body.addEventListener("htmx:afterSwap", (e) => {
   if (
