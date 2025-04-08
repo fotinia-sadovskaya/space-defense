@@ -17,7 +17,7 @@ body {
 }
 
 #gameCanvas {
- background: url("../images/background.jpg") center/cover no-repeat;
+  background: url("../images/background.jpg") center/cover no-repeat;
   display: block;
   width: 100vw;
   height: 100vh;
@@ -62,4 +62,58 @@ body {
 .hud__highscore {
   color: gold;
   font-weight: bold;
+}
+
+.store {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-align: left;
+  z-index: 10;
+  width: 200px;
+  color: white;
+}
+
+.store__title {
+  font-size: 18px;
+  color: gold;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.store__coins {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: lightgreen;
+  text-align: left;
+}
+
+.store__items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.store__item {
+  display: flex;
+  justify-content: center;
+}
+
+.store__btn {
+  background: linear-gradient(to right, #1f1f1f, #3a3a3a);
+  color: lightcyan;
+  border: 1px solid #888;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.store__btn:hover {
+  background: linear-gradient(to right, #2c2c2c, #555);
 }

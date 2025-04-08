@@ -30,14 +30,14 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-function gameLoop() {
+function updateGame() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   player.updateBullets();
   player.draw();
-  requestAnimationFrame(gameLoop);
+  requestAnimationFrame(updateGame);
 }
 
-gameLoop();
+updateGame();
 
 async function setRandomBackground() {
   console.log("🌌 Починаємо встановлення фону...");

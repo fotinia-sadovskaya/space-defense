@@ -1,23 +1,21 @@
 <div class="store">
   <h2 class="store__title">🛒 Магазин</h2>
-
   <div class="store__coins">💰 Монети: <span id="storeCoins">0</span></div>
-
   <ul class="store__items">
     <li class="store__item">
-      <button class="store__btn" onclick="buyUpgrade('laser')">
-        🔫 Купити Лазер
-      </button>
-    </li>
+        <button class="store__btn" onclick="toggleSound()">
+          🔊 Перемкнути Звук
+        </button>
+      </li>
     <li class="store__item">
       <button class="store__btn" onclick="buyUpgrade('rocket')">
         🚀 Купити Ракету
       </button>
-    </li>
-    <li class="store__item">
-      <button class="store__btn" onclick="toggleSound()">
-        🔊 Перемкнути Звук
-      </button>
+      <li class="store__item">
+        <button class="store__btn" onclick="buyUpgrade('laser')">
+          🔫 Купити Лазер
+        </button>
+      </li>
     </li>
   </ul>
 </div>
