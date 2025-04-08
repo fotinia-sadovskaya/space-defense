@@ -35,6 +35,7 @@ body {
 .hud__weapon,
 .hud__score {
   font-size: 18px;
+  color: greenyellow;
 }
 
 .explosion {
@@ -56,4 +57,9 @@ body {
     transform: scale(1.5);
     opacity: 0;
   }
+}
+
+.hud__highscore {
+  color: gold;
+  font-weight: bold;
 }

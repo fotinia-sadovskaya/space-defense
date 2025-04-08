@@ -1,0 +1,25 @@
+{
+  "name": "space-defence",
+  "version": "1.0.0",
+  "description": "## Опис проєкту \"Space Defence\" - захоплююча аркадна гра, в якій гравці керують космічним кораблем, знищують астероїди, супутники та б'ються з босами. Покращуйте корабель, долайте хвилі ворогів і досягайте нових рекордів!",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fotinia-sadovskaya/space-defence.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fotinia-sadovskaya/space-defence/issues"
+  },
+  "homepage": "https://github.com/fotinia-sadovskaya/space-defence#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "socket.io": "^4.8.1"
+  }
+}

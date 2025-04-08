@@ -1,6 +1,7 @@
 import Player from "./player.js";
 import Enemy from "./enemy.js";
 import Bullet from "./bullet.js";
+import Asteroid from "./asteroid.js";
 
 const canvas = document.getElementById("gameCanvas");
 canvas.width = window.innerWidth;

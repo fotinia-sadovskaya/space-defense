@@ -1,25 +1,25 @@
 export default class Bullet {
   // Додаємо експортування класу
-  constructor(canvas, x, y, type = "normal") {
+  constructor(canvas, x, y, weaponType = "normal") {
     this.canvas = canvas;
     this.ctx = canvas.getContext("2d");
     this.x = x;
     this.y = y;
-    this.type = type;
+    this.weaponType = weaponType;
 
-    if (this.type === "normal") {
+    if (this.weaponType === "normal") {
       this.speed = 7; // Швидкість руху кулі
       this.damage = 1;
       this.width = 5;
       this.height = 15;
       this.color = "yellow";
-    } else if (this.type === "strong") {
+    } else if (this.weaponType === "strong") {
       this.speed = 5;
       this.damage = 3;
       this.width = 10;
       this.height = 25;
       this.color = "red";
-    } else if (this.type === "laser") {
+    } else if (this.weaponType === "laser") {
       this.speed = 10;
       this.damage = 5;
       this.width = 3;

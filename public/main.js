@@ -2,6 +2,17 @@ import Enemy from "./enemy.js";
 import Player from "./player.js";
 import Bullet from "./bullet.js";
 import Asteroid from "./asteroid.js";
+import { updateScore, updateHighScoreUI } from "./utils/score.js";
+
+document.body.addEventListener("htmx:afterSwap", (e) => {
+  if (
+    e.detail.target.id === "hud-container" ||
+    e.detail.target.classList.contains("hud")
+  ) {
+    console.log("♻️ HUD оновлено");
+    updateHUD(); // Ваша функція з ui.js, яка показує очки, рекорд, зброю
+  }
+});
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
@@ -9,6 +20,7 @@ const ctx = canvas.getContext("2d");
 const bullets = []; // ✅ Масив для збереження снарядів
 const enemies = []; // Масив для ворогів
 const asteroids = []; // новий масив для астероїдів
+let currentWeapon = "normal"; // або "laser"
 const player = new Player(canvas, bullets); // Передаємо bullets у Player ✅ Створюємо гравця
 
 console.log("👾 Всі вороги:", enemies);
@@ -151,6 +163,18 @@ function collisionDetected(enemy, bullet) {
     bullet.y < enemy.y + enemy.height &&
     bullet.y + bullet.height > enemy.y
   );
+}
+
+// оновити highscore при старті
+updateHighScoreUI();
+
+// десь у твоїй логіці (після знищення ворога, наприклад)
+let currentScore = 0;
+function handleEnemyDestroyed() {
+  currentScore += 10;
+  document.getElementById("score").textContent = currentScore;
+  updateScore(currentScore);
+  updateHighScoreUI();
 }
 
 // function explodeProjectile(x, y) {

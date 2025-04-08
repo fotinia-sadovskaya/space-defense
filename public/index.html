@@ -5,14 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Space Shooter 🚀</title>
     <link rel="stylesheet" href="assets/styles/styles.css" />
+    <script
+      src="https://unpkg.com/htmx.org@1.9.10"
+      integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <canvas id="gameCanvas"></canvas>
-    <div class="hud">
-      <p class="hud__weapon">Зброя: <span id="weaponType">Звичайна</span></p>
-      <p class="hud__score">Очки: <span id="score">0</span></p>
-    </div>
+    <section
+      id="hud-container"
+      data-hx-trigger="load"
+      data-hx-get="partials/ui-hud.partial.html"
+      data-hx-swap="outerHTML"
+    ></section>
+
     <script type="module" src="game.js"></script>
     <script type="module" src="main.js"></script>
+    <!-- Підключення Socket.IO -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="socket-client.js"></script>
   </body>
 </html>

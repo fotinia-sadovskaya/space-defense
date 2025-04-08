@@ -5,8 +5,8 @@ export default class Asteroid {
     this.x = x;
     this.y = y;
     this.speed = speed || 1 + Math.random() * 3;
-    this.width = 60;
-    this.height = 60;
+    this.width = 80;
+    this.height = 80;
 
     this.image = new Image();
     this.image.src = "assets/images/asteroid.png"; // Додайте астероїд у папку images
