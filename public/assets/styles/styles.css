@@ -32,10 +32,31 @@ body {
   border-radius: 5px;
 }
 
+.hud__title {
+  font-size: 18px;
+  color: gold;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.hud__highscore {
+  color: gold;
+  font-weight: bold;
+}
+
 .hud__weapon,
 .hud__score {
-  font-size: 18px;
+  font-size: 16px;
   color: greenyellow;
+}
+
+.hud__players {
+  font-size: 16px;
+  color: lightblue;
+}
+.hud__lives {
+  font-size: 16px;
+  color: lightcoral;
 }
 
 .explosion {
@@ -59,11 +80,6 @@ body {
   }
 }
 
-.hud__highscore {
-  color: gold;
-  font-weight: bold;
-}
-
 .store {
   position: absolute;
   top: 10px;
@@ -73,7 +89,6 @@ body {
   border-radius: 5px;
   text-align: left;
   z-index: 10;
-  width: 200px;
   color: white;
 }
 
@@ -100,7 +115,7 @@ body {
 
 .store__item {
   display: flex;
-  justify-content: center;
+  justify-content: left;
 }
 
 .store__btn {
@@ -116,4 +131,39 @@ body {
 
 .store__btn:hover {
   background: linear-gradient(to right, #2c2c2c, #555);
+}
+
+.store__close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  color: #ccc;
+  cursor: pointer;
+}
+.store__close:hover {
+  color: white;
+}
+.store__close:focus {
+  outline: none;
+}
+.store__close:active {
+  transform: scale(0.95);
+}
+
+.store__btn--owned {
+  background-color: #333;
+  color: gray;
+  border-color: #555;
+  cursor: not-allowed;
+}
+.store__btn--owned:hover {
+  background-color: #333;
+  color: gray;
+  border-color: #555;
+}
+.store__btn--owned:active {
+  transform: none;
 }

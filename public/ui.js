@@ -20,14 +20,37 @@ export function updateStoreUI() {
   }
 }
 
+window.toggleSound = function () {
+  toggleSound();
+  alert(`🔊 Звук: ${getStore().mute ? "вимкнено" : "увімкнено"}`);
+};
+
+// Оновлення магазину
+window.closeStore = function () {
+  const store = document.getElementById("store");
+  if (store) store.remove(); // або store.style.display = "none";
+};
+
 // 👇 Це викликати після купівлі
 window.buyUpgrade = function (name) {
   buyUpgrade(name);
   alert(`✅ Куплено: ${name}`);
   updateStoreUI();
-};
+  updateScore(0); // Оновлення UI
+  updateHighScoreUI(); // Оновлення UI
 
-window.toggleSound = function () {
-  toggleSound();
-  alert(`🔊 Звук: ${getStore().mute ? "вимкнено" : "увімкнено"}`);
+  // Відправка даних на сервер
+  const store = getStore();
+  const coins = store.coins;
+  const weapons = store.weapons;
+  const data = { coins, weapons };
+  sendScore(data); // Відправка даних на сервер
+
+  const btns = document.querySelectorAll(".store__btn");
+  btns.forEach((btn) => {
+    if (btn.textContent.includes(name)) {
+      btn.classList.add("store__btn--owned");
+      btn.disabled = true;
+    }
+  });
 };

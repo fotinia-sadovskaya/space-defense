@@ -46,3 +46,8 @@ export function toggleSound() {
 export function isMuted() {
   return getStore().mute;
 }
+
+// 💾 Збереження стану гравця
+export function isUpgradeOwned(name) {
+  return getStore().weapons.includes(name);
+}
