@@ -1,53 +1,48 @@
-// public/store.jsstore.js — відповідає за:
-
+// public/store.js — керування сховищем гри (localStorage), відповідає за:
 //🎯 Покупки в магазині
-
 //🔇 Налаштування звуку
-
 //💾 Збереження стану гравця
 
-export const store = {
-  coins: 0,
-  upgrades: {
-    weapon: 1,
-    shield: 0,
-    speed: 1,
-  },
-
-  buyUpgrade(type) {
-    const cost = this.upgrades[type] * 100;
-    if (this.coins >= cost) {
-      this.coins -= cost;
-      this.upgrades[type]++;
-      console.log(`✅ Куплено: ${type} ➡ рівень ${this.upgrades[type]}`);
-    } else {
-      console.log("🚫 Недостатньо монет");
-    }
-  },
-
-  earnCoins(amount) {
-    this.coins += amount;
-    console.log(`💰 Отримано ${amount} монет`);
-  },
-};
-
-const storeState = JSON.parse(localStorage.getItem("store")) || {
+const defaultState = {
   weapons: ["basic"],
   coins: 0,
+  mute: false,
 };
 
-function buyUpgrade(upgradeName) {
-  if (!storeState.weapons.includes(upgradeName)) {
-    storeState.weapons.push(upgradeName);
-    localStorage.setItem("store", JSON.stringify(storeState));
+export function getStore() {
+  return JSON.parse(localStorage.getItem("store")) || defaultState;
+}
+
+export function saveStore(state) {
+  localStorage.setItem("store", JSON.stringify(state));
+}
+
+// 🎯 Купівля оновлення
+export function buyUpgrade(upgradeName) {
+  const store = getStore();
+  if (!store.weapons.includes(upgradeName)) {
+    store.weapons.push(upgradeName);
+    saveStore(store);
     console.log("🛒 Куплено:", upgradeName);
   }
 }
 
-const isMuted = JSON.parse(localStorage.getItem("mute")) || false;
+// 💸 Додавання монет
+export function addCoins(amount) {
+  const store = getStore();
+  store.coins += amount;
+  saveStore(store);
+  console.log("💰 Додано монет:", amount);
+}
 
-function toggleSound() {
-  const newValue = !isMuted;
-  localStorage.setItem("mute", newValue);
-  // Увімкнути / вимкнути аудіо
+// 🔇 Звук вкл/викл
+export function toggleSound() {
+  const store = getStore();
+  store.mute = !store.mute;
+  saveStore(store);
+  console.log("🔊 Звук:", store.mute ? "вимкнено" : "увімкнено");
+}
+
+export function isMuted() {
+  return getStore().mute;
 }
