@@ -174,3 +174,32 @@ body {
 .store__btn--owned:active {
   transform: none;
 }
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.toast--visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast--hidden {
+  opacity: 0;
+  transform: translateX(-50%) translateY(100%);
+}
+.toast--error {
+  background: rgba(255, 0, 0, 0.85);
+}

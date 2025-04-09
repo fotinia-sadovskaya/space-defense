@@ -13,21 +13,12 @@ import { addCoins } from "./utils/store.js";
 import { isUpgradeOwned } from "./utils/store.js";
 import { getStore } from "./utils/store.js";
 
-//import { updateHUD } from "./ui.js";
-//import { sendScore } from "./socket-client.js";
+//import { updateStoreUI } from "./ui.js";
 
-import { updateStoreUI } from "./ui.js";
-
-document.body.addEventListener("htmx:afterSwap", (e) => {
-  const target = e.detail.target;
-
-  if (target && target.classList.contains("store")) {
-    console.log("🛒 Магазин оновлено через HTMX");
-    updateStoreUI();
-  }
-
-  if (target && target.classList.contains("hud")) {
-    updateHUD(); // якщо у тебе є така функція
+document.body.addEventListener("htmx:afterSwap", async (e) => {
+  if (e.detail.target.classList.contains("store")) {
+    const ui = await import("./ui.js");
+    ui.updateStoreUI();
   }
 });
 
@@ -217,41 +208,3 @@ function handleEnemyDestroyed() {
   updateScore(currentScore);
   updateHighScoreUI();
 }
-
-// function updateStoreUI() {
-//   const store = document.getElementById("store");
-//   const coins = store.querySelector(".coins");
-//   const upgrades = store.querySelectorAll(".upgrade");
-//   coins.textContent = getStore().coins;
-//   upgrades.forEach((upgrade) => {
-//     const name = upgrade.dataset.name;
-//     const price = getStore().upgrades[name].price;
-//     const bought = getStore().upgrades[name].bought;
-//     upgrade.querySelector(".price").textContent = price;
-//     upgrade.querySelector(".bought").textContent = bought ? "✓" : "✗";
-//   });
-// }
-
-//updateStoreUI();
-
-// function explodeProjectile(x, y) {
-//   const explosion = new Image();
-//   explosion.src = "assets/images/explosion.png"; // Шлях до спрайта вибуху
-//   explosion.onload = () => {
-//     ctx.drawImage(explosion, x, y, 50, 50); // Малюємо вибух
-//     setTimeout(() => {
-//       ctx.clearRect(x, y, 50, 50); // Очищаємо вибух через 0.3 секунди
-//     }, 300);
-//   };
-// }
-
-// function explodeProjectile(bullet) {
-// bullet.image.src = "assets/images/explosion.png"; // Міняємо картинку на вибух
-// bullet.width = 30;
-// bullet.height = 30;
-// bullet.explode(); // Викликаємо метод вибуху снаряда
-
-// setTimeout(() => {
-// bullets.splice(bullets.indexOf(bullet), 1); // Видаляємо кулю з масиву
-// }, 300); // Вибух триває 0.3 секунди
-// } // Вибух снаряда

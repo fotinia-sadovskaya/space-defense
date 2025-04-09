@@ -7,6 +7,12 @@ import {
   isUpgradeOwned,
 } from "./utils/store.js";
 
+import { showToast } from "./utils/notify.js";
+import { playSound } from "./utils/sound.js";
+
+//import { Player } from "./player.js"; // Якщо треба показувати щось на екрані
+//import { updateCoinsUI } from "./utils/store.js"; // Якщо треба показувати щось на екрані
+
 //import { updateScore, updateHighScoreUI } from "./utils/score.js";
 //import { sendScore } from "./socket-client.js"; // Якщо треба показувати щось на екрані
 
@@ -20,16 +26,25 @@ export function updateStoreUI() {
   // Позначаємо куплені апгрейди
   const buttons = document.querySelectorAll(".store__btn");
   buttons.forEach((btn) => {
-    const text = btn.textContent.toLowerCase();
-    if (text.includes("лазер") && isUpgradeOwned("laser")) {
-      btn.classList.add("store__btn--owned");
-      btn.disabled = true;
-    }
-    if (text.includes("ракета") && isUpgradeOwned("rocket")) {
+    const upgrade = btn.dataset.upgrade;
+    if (isUpgradeOwned(upgrade)) {
       btn.classList.add("store__btn--owned");
       btn.disabled = true;
     }
   });
+  // Знаходимо кнопки за класом
+  // const buttons = document.querySelectorAll(".store__btn");
+  // buttons.forEach((btn) => {
+  //   const text = btn.textContent.toLowerCase();
+  //   if (text.includes("ракета") && isUpgradeOwned("rocket")) {
+  //     btn.classList.add("store__btn--owned");
+  //     btn.disabled = true;
+  //   }
+  //   if (text.includes("лазер") && isUpgradeOwned("laser")) {
+  //     btn.classList.add("store__btn--owned");
+  //     btn.disabled = true;
+  //   }
+  // });
 }
 
 // 🎮 Оновлення HUD (поточна зброя, очки, рекорд)
@@ -57,18 +72,34 @@ window.closeStore = function () {
 // 👇 Це викликати після купівлі
 window.buyUpgrade = function (name) {
   buyUpgrade(name);
-  alert(`✅ Куплено: ${name}`);
+  showToast(`✅ Куплено: ${name}`);
+
+  //  alert(`✅ Куплено: ${name}`);
+  //  console.log(`✅ Куплено: ${name}`);
+
   updateStoreUI();
 };
 
 window.toggleSound = function () {
-  toggleSound();
-  alert(`🔊 Звук: ${getStore().mute ? "вимкнено" : "увімкнено"}`);
+  toggleSound(); // оновлює store
+  const isMuted = getStore().mute;
+
+  if (!isMuted) playSound("toggle"); // тільки коли звук увімкнено
+
+  const icon = isMuted ? "🔇" : "🔊";
+  showToast(`${icon} Звук: ${isMuted ? "вимкнено" : "увімкнено"}`);
 };
 
 if (isMuted()) {
   audioElement.volume = 0;
 }
+
+window.buyUpgrade = function (name) {
+  buyUpgrade(name);
+  showToast(`✅ Куплено: ${name}`);
+  playSound("buy");
+  updateStoreUI();
+};
 
 // Додати клас до кнопки, щоб показати, що оновлення вже куплено
 // Знайти кнопку за текстом
