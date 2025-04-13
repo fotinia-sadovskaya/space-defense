@@ -288,7 +288,7 @@ body {
     opacity: 0;
   }
 }
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .hud,
   .store,
   .profile {
@@ -375,4 +375,4 @@ body {
     font-size: 8px;
     padding: 2px;
   }
-}
+} */
