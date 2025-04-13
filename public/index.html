@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Space Defence 🚀</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.png" />
     <link rel="stylesheet" href="assets/styles/styles.css" />
     <script
       src="https://unpkg.com/htmx.org@1.9.10"
@@ -15,12 +16,19 @@
     <canvas id="gameCanvas"></canvas>
     <section
       id="hud-container"
-      data-hx-trigger="load"
       data-hx-get="partials/ui-hud.partial.html"
+      data-hx-trigger="load"
       data-hx-swap="outerHTML"
     ></section>
     <section
+      id="store-container"
       data-hx-get="partials/ui-store.partial.html"
+      data-hx-trigger="load"
+      data-hx-swap="outerHTML"
+    ></section>
+    <section
+      id="profile-container"
+      data-hx-get="partials/ui-profile.partial.html"
       data-hx-trigger="load"
       data-hx-swap="outerHTML"
     ></section>

@@ -2,19 +2,78 @@ import Enemy from "./enemy.js";
 import Player from "./player.js";
 import Bullet from "./bullet.js";
 import Asteroid from "./asteroid.js";
-import { updateScore, updateHighScoreUI } from "./utils/score.js";
 
-// Якщо треба показувати щось на екрані
-import { isMuted } from "./utils/store.js";
-import { toggleSound } from "./utils/store.js";
-import { buyUpgrade } from "./utils/store.js";
-import { addCoins } from "./utils/store.js";
+import { updateScore, updateHighScoreUI, getHighScore } from "./utils/score.js";
+import { showToast } from "./utils/notify.js";
+import { setPlayerName } from "./profile.js";
+import {
+  toggleSound,
+  isMuted,
+  buyUpgrade,
+  addCoins,
+  isUpgradeOwned,
+  getStore,
+} from "./utils/store.js";
+import { updateHUD, updateStoreUI } from "./ui.js";
+import { playSound } from "./utils/sound.js";
 
-import { isUpgradeOwned } from "./utils/store.js";
-import { getStore } from "./utils/store.js";
+// 🧠 Глобальні змінні
+let currentScore = 0;
+let currentWeapon = "normal";
 
-//import { updateStoreUI } from "./ui.js";
+// 🎧 Для перемикача звуку
+window.toggleSound = function () {
+  toggleSound();
+  const mute = getStore().mute;
+  showToast(mute ? "🔇 Звук вимкнено" : "🔊 Звук увімкнено");
+  if (!mute) playSound("toggle");
+  updateStoreUI();
+};
 
+// 💰 Покупки
+window.buyUpgrade = function (name) {
+  buyUpgrade(name);
+  playSound("buy");
+  showToast(`✅ Куплено: ${name}`);
+  updateStoreUI();
+};
+
+// 👤 Збереження імені
+window.setPlayerNameFromInput = function () {
+  const input = document.getElementById("playerNameInput");
+  if (input) {
+    setPlayerName(input.value);
+    showToast(`👤 Ім’я збережено: ${input.value}`);
+  }
+};
+
+// 🌌 Переклад назви зброї
+function translateWeaponName(type) {
+  return (
+    {
+      normal: "Звичайна",
+      strong: "Сильна",
+      laser: "Лазер",
+    }[type] || "Невідома"
+  );
+}
+
+// 🧠 Оновлення HUD після HTMX
+document.body.addEventListener("htmx:afterSwap", (e) => {
+  if (
+    e.detail.target.id === "hud-container" ||
+    e.detail.target.classList.contains("hud")
+  ) {
+    console.log("♻️ HUD оновлено");
+    updateHUD({
+      score: currentScore,
+      highscore: getHighScore(),
+      weapon: translateWeaponName(currentWeapon),
+    });
+  }
+});
+
+// 🎮 Оновлення магазину
 document.body.addEventListener("htmx:afterSwap", async (e) => {
   if (e.detail.target.classList.contains("store")) {
     const ui = await import("./ui.js");
@@ -22,7 +81,7 @@ document.body.addEventListener("htmx:afterSwap", async (e) => {
   }
 });
 
-// Додати обробник події для закриття магазину
+// 🎧 Відкрити магазин
 document.addEventListener("keydown", (e) => {
   if (e.code === "KeyM") {
     fetch("partials/ui-store.partial.html")
@@ -36,27 +95,14 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-document.body.addEventListener("htmx:afterSwap", (e) => {
-  if (
-    e.detail.target.id === "hud-container" ||
-    e.detail.target.classList.contains("hud")
-  ) {
-    console.log("♻️ HUD оновлено");
-    updateHUD(); // Ваша функція з ui.js, яка показує очки, рекорд, зброю
-  }
-});
-
+// 🎮 Ініціалізація гри
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
-const bullets = []; // ✅ Масив для збереження снарядів
-const enemies = []; // Масив для ворогів
-const asteroids = []; // новий масив для астероїдів
-let currentWeapon = "normal"; // або "laser"
-const player = new Player(canvas, bullets); // Передаємо bullets у Player ✅ Створюємо гравця
-
-console.log("👾 Всі вороги:", enemies);
-console.log("🎯 Масив куль при старті:", bullets);
+const bullets = [];
+const enemies = [];
+const asteroids = [];
+const player = new Player(canvas, bullets);
 
 function spawnEnemy() {
   const x = Math.random() * (canvas.width - 50);
@@ -68,30 +114,28 @@ function spawnEnemy() {
     total: enemies.length,
   });
 }
-setInterval(spawnEnemy, 2000); // ✅ Спавнимо ворога кожні 2 секунди
+setInterval(spawnEnemy, 2000);
 
 function spawnAsteroid() {
   const x = Math.random() * (canvas.width - 60);
   const speed = 1 + Math.random() * 2;
   asteroids.push(new Asteroid(canvas, x, -60, speed));
 }
-setInterval(spawnAsteroid, 3500); // Спавнимо астероїд кожні 3.5 сек
+setInterval(spawnAsteroid, 3500);
 
-// 🎮 Головний ігровий цикл
+function updateWeaponUI() {
+  const span = document.getElementById("weaponType");
+  if (span) span.textContent = translateWeaponName(currentWeapon);
+}
+updateWeaponUI();
 
+// 🔁 Головний ігровий цикл
 function gameLoop() {
-  console.log("🔄 Оновлення гри"); // Лог кожного кадру!
-  ctx.clearRect(0, 0, canvas.width, canvas.height); // Очищуємо екран
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   bullets.forEach((bullet, index) => {
-    // ✅ Використовуємо масив bullets
-    bullet.move(); // 🔥 Рух кулі
-    console.log("🎯 Куля рухається, нова координата Y:", bullet.y);
-    bullet.draw(); // 🔥 Малюємо кулю
-    console.log("🎨 Малюємо кулю на позиції:", bullet.x, bullet.y);
-
-    // Видалення кулі, якщо вона зникла (вибухнула),
-    // якщо вона виходить за межі екрану
+    bullet.move();
+    bullet.draw();
     if (bullet.isOutOfScreen()) {
       bullets.splice(index, 1);
     }
@@ -100,95 +144,114 @@ function gameLoop() {
   asteroids.forEach((asteroid, index) => {
     asteroid.move();
     asteroid.draw();
-
     if (asteroid.y > canvas.height) {
-      asteroids.splice(index, 1); // Видалити, якщо вийшов за межі
+      asteroids.splice(index, 1);
     }
   });
 
-  checkCollisions(); // 🔥 Додаємо перевірку попадань
+  checkCollisions();
 
-  //✅ Рухаємо та малюємо всіх ворогів
   enemies.forEach((enemy, index) => {
     enemy.move();
     enemy.draw();
-
     if (enemy.y > canvas.height) {
-      enemies.splice(index, 1); // Видаляємо ворога, якщо він зник за межами екрану
+      enemies.splice(index, 1);
     }
   });
 
-  player.draw(); // ✅ Малюємо гравця
+  player.draw();
 
   requestAnimationFrame(gameLoop);
 }
 
-// 🎮 Додаємо керування гравцем
+// 👾 Керування
 window.addEventListener("keydown", (event) => {
   if (event.key === "ArrowLeft") player.move("left");
   if (event.key === "ArrowRight") player.move("right");
   if (event.key === " ") player.shoot();
-  if (event.key === "w") player.changeWeapon();
+  if (event.key === "w") {
+    player.changeWeapon();
+    currentWeapon = player.weaponTypes[player.weaponIndex];
+    updateHUD({
+      score: currentScore,
+      highscore: getHighScore(),
+      weapon: translateWeaponName(currentWeapon),
+    });
+  }
 });
 
-// ✅ Запускаємо гру
-gameLoop();
-
+// 🧠 Перевірка зіткнень
 function checkCollisions() {
+  const bulletsToRemove = new Set();
+  const enemiesToRemove = new Set();
+  const asteroidsToRemove = new Set();
+
   bullets.forEach((bullet, bulletIndex) => {
-    // 🔥 Використовуємо bullets
     enemies.forEach((enemy, enemyIndex) => {
       if (collisionDetected(enemy, bullet)) {
-        console.log("💥 Влучення! Видаляємо ворога та кулю.");
-        explodeProjectile(bullet); // Додаємо вибух до місця попадання
-
-        //explodeProjectile(enemy.x, enemy.y);
-
-        // Видаляємо тільки поточного ворога
-        enemies.splice(enemyIndex, 1);
-
-        // Видаляємо тільки поточний снаряд
-        bullets.splice(bulletIndex, 1);
+        explodeProjectile(bullet);
+        bulletsToRemove.add(bulletIndex);
+        enemiesToRemove.add(enemyIndex);
+        currentScore += 10;
+        addCoins(10);
+        updateScore(currentScore);
+        updateHUD({
+          score: currentScore,
+          highscore: getHighScore(),
+          weapon: translateWeaponName(currentWeapon),
+        });
       }
     });
-  });
 
-  // Перевірка для астероїдів
-  bullets.forEach((bullet, bulletIndex) => {
     asteroids.forEach((asteroid, asteroidIndex) => {
       if (collisionDetected(asteroid, bullet)) {
-        console.log("💥 Влучення в астероїд!");
-        explodeProjectile(bullet.x, bullet.y);
-        bullets.splice(bulletIndex, 1);
-        asteroids.splice(asteroidIndex, 1);
+        explodeProjectile(bullet);
+        bulletsToRemove.add(bulletIndex);
+        asteroidsToRemove.add(asteroidIndex);
+        currentScore += 5;
+        addCoins(5);
+        updateScore(currentScore);
+        updateHUD({
+          score: currentScore,
+          highscore: getHighScore(),
+          weapon: translateWeaponName(currentWeapon),
+        });
       }
     });
   });
+
+  [...bulletsToRemove]
+    .sort((a, b) => b - a)
+    .forEach((i) => bullets.splice(i, 1));
+  [...enemiesToRemove]
+    .sort((a, b) => b - a)
+    .forEach((i) => enemies.splice(i, 1));
+  [...asteroidsToRemove]
+    .sort((a, b) => b - a)
+    .forEach((i) => asteroids.splice(i, 1));
 }
 
-// Функція для вибуху снаряда
-function explodeProjectile(x, y) {
-  let explosion = document.createElement("div");
-  explosion.classList.add("explosion");
-  explosion.style.left = `${x}px`;
-  explosion.style.top = `${y}px`;
+// 💥 Анімація вибуху
+function explodeProjectile(bullet) {
+  playSound("explode");
+
+  const explosion = document.createElement("div");
+  explosion.className = "explosion";
+  explosion.style.position = "absolute";
+  explosion.style.left = `${bullet.x}px`;
+  explosion.style.top = `${bullet.y}px`;
+  explosion.style.width = "120px";
+  explosion.style.height = "120px";
+  explosion.style.background =
+    'url("assets/images/explosion.png") center/cover no-repeat';
+  explosion.style.animation = "explode 0.3s ease-out";
 
   document.body.appendChild(explosion);
-
-  setTimeout(() => {
-    explosion.remove();
-  }, 300); // Вибух триває 0.3 секунди
+  setTimeout(() => explosion.remove(), 300);
 }
 
-// Перевірка на зіткнення між кулею та ворогом
+// 🔍 Колізія
 function collisionDetected(enemy, bullet) {
-  console.log(
-    `🔍 Перевірка зіткнення: bullet(${bullet.x}, ${bullet.y}) vs enemy(${enemy.x}, ${enemy.y})`
-  );
-  console.log(
-    `🔍 Розміри: bullet(${bullet.width}, ${bullet.height}) vs enemy(${enemy.width}, ${enemy.height})`
-  );
-
   return (
     bullet.x < enemy.x + enemy.width &&
     bullet.x + bullet.width > enemy.x &&
@@ -197,14 +260,5 @@ function collisionDetected(enemy, bullet) {
   );
 }
 
-// оновити highscore при старті
-updateHighScoreUI();
-
-// десь у твоїй логіці (після знищення ворога, наприклад)
-let currentScore = 0;
-function handleEnemyDestroyed() {
-  currentScore += 10;
-  document.getElementById("score").textContent = currentScore;
-  updateScore(currentScore);
-  updateHighScoreUI();
-}
+// 🔁 Старт
+gameLoop();

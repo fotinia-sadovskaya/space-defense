@@ -17,3 +17,4 @@ function sendScore(score) {
 }
 
 export { sendScore };
+export default socket; // Експортуємо сокет для використання в інших модулях

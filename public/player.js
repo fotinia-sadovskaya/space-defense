@@ -1,4 +1,7 @@
 import Bullet from "./bullet.js";
+import { playSound } from "./utils/sound.js";
+import { updateHUD } from "./ui.js";
+import { getScore, getHighScore } from "./utils/score.js";
 
 export default class Player {
   constructor(canvas, bullets) {
@@ -64,49 +67,28 @@ export default class Player {
   }
 
   shoot() {
-    const currentWeapon = this.weaponTypes[this.weaponIndex];
-
-    // 🔴 Перевіряємо, чи зброя існує
-    if (!currentWeapon) {
-      console.error(
-        "❌ Помилка! currentWeapon = undefined, weaponIndex =",
-        this.weaponIndex
-      );
-      return;
-    }
-
-    console.log(`🚀 Вогонь! (${currentWeapon})`); // 🔥 Лог при стрільбі
-
     const bullet = new Bullet(
       this.canvas,
       this.x + this.width / 2,
       this.y,
-      currentWeapon
+      this.weaponTypes[this.weaponIndex]
     );
-    this.bullets.push(bullet); // ✅ Додаємо кулю у спільний масив
-    console.log("🎯 Куля створена:", bullet); // 🔥 Лог для перевірки
+    this.bullets.push(bullet);
+
+    playSound("shoot"); // 🔫 звук пострілу
   }
 
   changeWeapon() {
-    console.log(
-      "🔄 Перед зміною:",
-      this.weaponIndex,
-      this.weaponTypes[this.weaponIndex]
-    );
-
-    // ✅ Фікс проблеми: переконуємось, що weaponIndex – число
-    if (typeof this.weaponIndex !== "number" || isNaN(this.weaponIndex)) {
-      console.error("❌ Помилка! weaponIndex некоректний:", this.weaponIndex);
-      this.weaponIndex = 0; // 🔥 Виправлення: якщо щось пішло не так – повертаємось до нормальної зброї
-    }
-
     this.weaponIndex = (this.weaponIndex + 1) % this.weaponTypes.length;
 
-    console.log(
-      "✅ Після зміни:",
-      this.weaponIndex,
-      this.weaponTypes[this.weaponIndex]
-    );
+    const currentWeapon = this.weaponTypes[this.weaponIndex];
+    updateHUD({
+      weapon: currentWeapon,
+      score: getScore(),
+      highscore: getHighScore(),
+    });
+
+    console.log(`🛠 Змінено зброю на: ${currentWeapon}`);
   }
 
   updateBullets() {

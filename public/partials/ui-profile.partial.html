@@ -1,0 +1,24 @@
+<div class="profile" id="profilePanel">
+  <button
+    class="profile__close"
+    onclick="document.getElementById('profilePanel').remove()"
+  >
+    ✖
+  </button>
+
+  <h2 class="profile__title">👩‍🚀 Профіль гравця</h2>
+
+  <div class="profile__form">
+    <label for="playerNameInput" class="profile__label">Ваше ім’я:</label>
+    <input
+      type="text"
+      id="playerNameInput"
+      class="profile__input"
+      placeholder="Введіть ім’я"
+      maxlength="20"
+    />
+    <button class="profile__btn" onclick="setPlayerNameFromInput()">
+      Зберегти
+    </button>
+  </div>
+</div>

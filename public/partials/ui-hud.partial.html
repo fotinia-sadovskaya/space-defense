@@ -1,7 +1,32 @@
-<div class="hud">
+<div class="hud" id="hud-container">
   <h2 class="hud__title">🎮 Панель гравця</h2>
   <p class="hud__weapon">🔫 Зброя: <span id="weaponType">Звичайна</span></p>
   <p class="hud__score">💥 Очки: <span id="score">0</span></p>
   <p class="hud__highscore">🏆 Рекорд: <span id="highscore">0</span></p>
   <p class="hud__players">🧑‍🚀 Онлайн: <span id="playersOnline">1</span></p>
+
+  <!-- 🧑‍🚀 Кнопка для відкриття профілю -->
+  <!-- 🛒 Кнопка для відкриття магазину -->
+  <ul class="hud__items">
+    <li class="hud__item">
+      <button
+        class="hud__btn"
+        data-hx-get="partials/ui-profile.partial.html"
+        data-hx-target="body"
+        data-hx-swap="beforeend"
+      >
+        👩‍🚀 Профіль
+      </button>
+    </li>
+    <li class="hud__item">
+      <button
+        class="hud__btn"
+        data-hx-get="partials/ui-store.partial.html"
+        data-hx-target="body"
+        data-hx-swap="beforeend"
+      >
+        🛒 Магазин
+      </button>
+    </li>
+  </ul>
 </div>

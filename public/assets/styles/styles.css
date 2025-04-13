@@ -17,6 +17,8 @@ body {
 }
 
 #gameCanvas {
+  position: absolute;
+  z-index: 0;
   background: url("../images/background.jpg") center/cover no-repeat;
   display: block;
   width: 100vw;
@@ -25,6 +27,7 @@ body {
 
 .hud {
   position: absolute;
+  z-index: 10;
   top: 10px;
   left: 10px;
   background: rgba(0, 0, 0, 0.7);
@@ -53,6 +56,7 @@ body {
 .hud__players {
   font-size: 16px;
   color: lightblue;
+  margin-bottom: 10px;
 }
 .hud__lives {
   font-size: 16px;
@@ -66,25 +70,22 @@ body {
   margin-right: 5px;
 }
 
-.explosion {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  background-image: url("assets/images/explosion.png");
-  background-size: cover;
-  pointer-events: none;
-  animation: explode 0.3s ease-out;
+.hud__btn,
+.store__btn {
+  background: linear-gradient(to right, #1f1f1f, #3a3a3a);
+  color: lightcyan;
+  border: 1px solid #888;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+  width: 100%;
 }
 
-@keyframes explode {
-  0% {
-    transform: scale(0.5);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1.5);
-    opacity: 0;
-  }
+.hud__btn:hover,
+.store__btn:hover {
+  background: linear-gradient(to right, #2c2c2c, #555);
 }
 
 .store {
@@ -113,31 +114,18 @@ body {
   text-align: left;
 }
 
-.store__items {
+.store__items,
+.hud__items {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.store__item {
+.store__item,
+.hud__item {
   display: flex;
   justify-content: left;
-}
-
-.store__btn {
-  background: linear-gradient(to right, #1f1f1f, #3a3a3a);
-  color: lightcyan;
-  border: 1px solid #888;
-  border-radius: 5px;
-  padding: 5px 10px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.3s ease;
-}
-
-.store__btn:hover {
-  background: linear-gradient(to right, #2c2c2c, #555);
 }
 
 .store__close {
@@ -158,6 +146,9 @@ body {
 }
 .store__close:active {
   transform: scale(0.95);
+}
+.store__close:focus-visible {
+  outline: 2px solid lightskyblue;
 }
 
 .store__btn--owned {
@@ -202,4 +193,98 @@ body {
 }
 .toast--error {
   background: rgba(255, 0, 0, 0.85);
+}
+
+.profile {
+  position: absolute;
+  z-index: 10;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-family: inherit;
+}
+
+.profile__title {
+  font-size: 18px;
+  color: gold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.profile__form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.profile__label {
+  font-size: 14px;
+  color: white;
+}
+
+.profile__input {
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid #777;
+  background-color: #222;
+  color: white;
+  font-size: 14px;
+}
+
+.profile__btn {
+  padding: 6px;
+  font-size: 14px;
+  background: linear-gradient(to right, #1f1f1f, #3a3a3a);
+  border: 1px solid #888;
+  border-radius: 5px;
+  color: lightcyan;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.profile__btn:hover {
+  background: linear-gradient(to right, #2c2c2c, #555);
+}
+
+.profile__close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  color: #ccc;
+  cursor: pointer;
+}
+.profile__close:hover {
+  color: white;
+}
+.profile__close:focus {
+  outline: none;
+}
+.profile__close:active {
+  transform: scale(0.95);
+}
+
+.explosion {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-image: url("assets/images/explosion.png");
+  background-size: cover;
+  pointer-events: none;
+  animation: explode 0.3s ease-out;
+}
+
+@keyframes explode {
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
 }
