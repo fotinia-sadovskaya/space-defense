@@ -1,8 +1,9 @@
-name: 🚀 Deploy HTML to GitHub Pages
+name: Deploy HTML to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -17,18 +18,21 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages   # ← 🎯 Цей рядок важливий!
+
     steps:
-      - name: 📥 Checkout Repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: 🛠️ Setup Pages
+      - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: 📦 Upload static site
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./
+          path: . # ← Уся твоя HTML/JS структура
 
-      - name: 🚀 Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
