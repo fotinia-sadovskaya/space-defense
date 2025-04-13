@@ -288,3 +288,91 @@ body {
     opacity: 0;
   }
 }
+@media (max-width: 768px) {
+  .hud,
+  .store,
+  .profile {
+    width: 90%;
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .hud__title,
+  .store__title,
+  .profile__title {
+    font-size: 16px;
+  }
+
+  .hud__btn,
+  .store__btn,
+  .profile__btn {
+    font-size: 12px;
+    padding: 4px;
+  }
+}
+@media (max-width: 480px) {
+  .hud,
+  .store,
+  .profile {
+    width: 95%;
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  .hud__title,
+  .store__title,
+  .profile__title {
+    font-size: 14px;
+  }
+
+  .hud__btn,
+  .store__btn,
+  .profile__btn {
+    font-size: 10px;
+    padding: 3px;
+  }
+}
+@media (max-width: 320px) {
+  .hud,
+  .store,
+  .profile {
+    width: 100%;
+    padding: 4px;
+    font-size: 10px;
+  }
+
+  .hud__title,
+  .store__title,
+  .profile__title {
+    font-size: 12px;
+  }
+
+  .hud__btn,
+  .store__btn,
+  .profile__btn {
+    font-size: 8px;
+    padding: 2px;
+  }
+}
+@media (max-height: 600px) {
+  .hud,
+  .store,
+  .profile {
+    height: auto;
+    padding: 4px;
+    font-size: 10px;
+  }
+
+  .hud__title,
+  .store__title,
+  .profile__title {
+    font-size: 12px;
+  }
+
+  .hud__btn,
+  .store__btn,
+  .profile__btn {
+    font-size: 8px;
+    padding: 2px;
+  }
+}
