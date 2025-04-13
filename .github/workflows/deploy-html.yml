@@ -19,7 +19,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment:
-      name: github-pages   # ← 🎯 Цей рядок важливий!
+      name: github-pages
 
     steps:
       - name: Checkout repository
@@ -31,7 +31,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: . # ← Уся твоя HTML/JS структура
+          path: public # ← 🌟 Оце головне!
 
       - name: Deploy to GitHub Pages
         id: deployment
