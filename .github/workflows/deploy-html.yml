@@ -2,8 +2,8 @@ name: 🚀 Deploy HTML to GitHub Pages
 
 on:
   push:
-    branches: [main] # 🔁 Працює на пуші в main
-  workflow_dispatch: # 👇 Можна запускати вручну
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -27,7 +27,7 @@ jobs:
       - name: 📦 Upload static site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./ # 📂 Увесь корінь (index.html, assets, js...)
+          path: ./
 
       - name: 🚀 Deploy to GitHub Pages
         id: deployment
