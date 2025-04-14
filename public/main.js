@@ -17,6 +17,9 @@ import {
 import { updateHUD, updateStoreUI } from "./ui.js";
 import { playSound } from "./utils/sound.js";
 
+import { initSocket } from "./socket-client.js";
+initSocket(); // 🔗 Підключення до WebSocket сервера
+
 // 🧠 Глобальні змінні
 let currentScore = 0;
 let currentWeapon = "normal";

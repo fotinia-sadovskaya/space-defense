@@ -33,6 +33,7 @@ body {
   background: rgba(0, 0, 0, 0.7);
   padding: 10px;
   border-radius: 5px;
+  width: 200px;
 }
 
 .hud__title {
@@ -288,91 +289,55 @@ body {
     opacity: 0;
   }
 }
+
 @media (max-width: 768px) {
-  .hud,
-  .store,
+  .hud {
+    left: 5px;
+    top: 5px;
+    width: auto;
+    max-width: 90vw;
+  }
+
   .profile {
-    width: 90%;
-    padding: 8px;
-    font-size: 14px;
+    left: 5px;
+    bottom: 5px;
+    width: auto;
+    max-width: 90vw;
   }
 
-  .hud__title,
-  .store__title,
-  .profile__title {
-    font-size: 16px;
-  }
-
-  .hud__btn,
-  .store__btn,
-  .profile__btn {
-    font-size: 12px;
-    padding: 4px;
+  .store {
+    right: 5px;
+    top: 5px;
+    width: auto;
+    max-width: 90vw;
   }
 }
+
 @media (max-width: 480px) {
   .hud,
   .store,
   .profile {
-    width: 95%;
-    padding: 6px;
-    font-size: 12px;
-  }
-
-  .hud__title,
-  .store__title,
-  .profile__title {
-    font-size: 14px;
+    padding: 5px;
+    font-size: 11px;
+    max-width: 95vw;
+    border-radius: 4px;
   }
 
   .hud__btn,
   .store__btn,
   .profile__btn {
-    font-size: 10px;
-    padding: 3px;
-  }
-}
-@media (max-width: 320px) {
-  .hud,
-  .store,
-  .profile {
-    width: 100%;
-    padding: 4px;
+    padding: 3px 6px;
     font-size: 10px;
   }
 
   .hud__title,
   .store__title,
   .profile__title {
-    font-size: 12px;
+    font-size: 13px;
   }
 
-  .hud__btn,
-  .store__btn,
-  .profile__btn {
-    font-size: 8px;
-    padding: 2px;
-  }
-}
-@media (max-height: 600px) {
-  .hud,
-  .store,
-  .profile {
-    height: auto;
-    padding: 4px;
-    font-size: 10px;
-  }
-
-  .hud__title,
-  .store__title,
-  .profile__title {
-    font-size: 12px;
-  }
-
-  .hud__btn,
-  .store__btn,
-  .profile__btn {
-    font-size: 8px;
-    padding: 2px;
+  .hud__items,
+  .store__items {
+    flex-wrap: wrap;
   }
 }

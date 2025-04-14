@@ -8,14 +8,21 @@ const io = new Server(server);
 
 app.use(express.static("public"));
 
-io.on("connection", (socket) => {
-  console.log("🧑‍🚀 Гравець підключився:", socket.id);
+let playersOnline = 0;
 
-  socket.on("player-move", (data) => {
-    socket.broadcast.emit("enemy-update", data); // розсилка іншим
+io.on("connection", (socket) => {
+  playersOnline++;
+  console.log("🧑‍🚀 Гравець підключився:", socket.id);
+  io.emit("players-count", playersOnline);
+
+  socket.on("set-name", (name) => {
+    console.log(`🎮 Ім’я гравця: ${name}`);
+    socket.broadcast.emit("player-joined", name);
   });
 
   socket.on("disconnect", () => {
+    playersOnline--;
+    io.emit("players-count", playersOnline);
     console.log("🚪 Гравець вийшов:", socket.id);
   });
 });
