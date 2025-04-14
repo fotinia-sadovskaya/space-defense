@@ -17,8 +17,8 @@ import {
 import { updateHUD, updateStoreUI } from "./ui.js";
 import { playSound } from "./utils/sound.js";
 
-import { initSocket } from "./socket-client.js";
-initSocket(); // 🔗 Підключення до WebSocket сервера
+// import { initSocket } from "./socket-client.js";
+// initSocket(); // 🔗 Підключення до WebSocket сервера
 
 // 🧠 Глобальні змінні
 let currentScore = 0;
@@ -166,6 +166,18 @@ function gameLoop() {
 
   requestAnimationFrame(gameLoop);
 }
+
+// window.addEventListener("resize", () => {
+//   canvas.width = window.innerWidth;
+//   canvas.height = window.innerHeight;
+
+//   player.resize();
+
+//   enemies.forEach((enemy) => enemy.resize?.());
+//   asteroids.forEach((asteroid) => asteroid.resize?.());
+
+//   console.log("📱 Canvas та об'єкти адаптовані під новий розмір екрану");
+// });
 
 // 👾 Керування
 window.addEventListener("keydown", (event) => {

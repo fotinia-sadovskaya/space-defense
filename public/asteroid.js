@@ -13,6 +13,11 @@ export default class Asteroid {
     this.image.onload = () => console.log("🪨 Астероїд завантажено");
   }
 
+  // resize() {
+  //   this.width = this.canvas.width * 0.07;
+  //   this.height = this.canvas.height * 0.07;
+  // }
+
   move() {
     this.y += this.speed;
   }

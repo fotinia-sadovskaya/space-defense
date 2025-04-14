@@ -57,6 +57,12 @@ export default class Player {
     );
   }
 
+  // resize() {
+  //   this.width = this.canvas.width * 0.08;
+  //   this.height = this.canvas.height * 0.12;
+  //   this.y = this.canvas.height - this.height - 20;
+  // }
+
   move(direction) {
     if (direction === "left" && this.x > 0) {
       this.x -= this.speed;

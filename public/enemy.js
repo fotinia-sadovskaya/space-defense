@@ -18,6 +18,11 @@ export default class Enemy {
     // Додано обробник помилки для зображення ворога
   }
 
+  // resize() {
+  //   this.width = this.canvas.width * 0.06;
+  //   this.height = this.canvas.height * 0.08;
+  // }
+
   move() {
     this.y += this.speed; // Ворог рухається вниз
   }
