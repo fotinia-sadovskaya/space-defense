@@ -16,21 +16,21 @@
 │ │ │── /deploy-html.yml
 │── /public  
 │ │── /assets  
-│ │ │── /images # (спрайти, іконки, бекграунди 💾)  
-│ │ │── /sounds #(музика та ефекти 🔊)  
-│ │ │── /styles #(CSS-оформлення 🎨)
+│ │ │── /images (спрайти, іконки, бекграунди 💾)  
+│ │ │── /sounds (музика та ефекти 🔊)  
+│ │ │── /styles (CSS-оформлення 🎨)
 │ │── /partials  
-│ │ │── /ui-hud.partial.html  # (панель гравця 🧑🏆  
+│ │ │── /ui-hud.partial.html (панель гравця 🧑🏆)  
 │ │ │── /ui-profile.partial.html (панель профілю гравця  👤)  
 │ │ │── /ui-store.partial.html (панель магазину 🛒)
 │ │── /utils  
-│ │ │── /notify.js(toast ✅ )  
+│ │ │── /notify.js (toast ✅ )  
 │ │ │── /score.js (модуль для рахунку очок, рекордів і збереження у localStorage  🎯🏆)
 │ │ │── /sound.js  (керування музикою та ефектами 🎧)  
-│ │ │── /store.js  (керування сховищем гри  (localStorage) 💾🔇💰
+│ │ │── /store.js  (керування сховищем гри  (localStorage) 💾🔇💰)
 │ │── index.html (точка входу 🧠)
 │ │── main.js (основна логіка запуску 🎮)  
-│ │── game.js (ініціалізація гри та керування ігровим циклом 🔁)  
+│ │── game.js (ініціалізація гри та керування ігровим циклом 🕹️🔁)  
 │ │── player.js (клас гравця 🚀)  
 │ │── bullet.js (клас снарядів 🔫💥)
 │ │── asteroid.js (клас астероідів 🌌)
@@ -43,7 +43,7 @@
 │── /server  
 │ │── server.js (WebSockets-сервер 🌍)  
 │── package.json  
-│── README.md
+│── README.md (документація проєкту 📊)
 
 ```
 
