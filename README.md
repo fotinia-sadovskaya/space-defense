@@ -1,46 +1,51 @@
 # Space Defense 🚀🛡️
 
-## Опис проєкту
+## Опис проєкту  
+
 "Space Defense" - захоплююча аркадна гра, в якій гравці керують космічним кораблем, знищують астероїди, супутники та б'ються з босами. Покращуйте корабель, долайте хвилі ворогів і досягайте нових рекордів!
 
 ---
 
 ## Структура проєкту 📂
 
-/space-shooter 
+```plaintext
+
+/space-shooter  
 │── /.github
 │ │── /workflows
 │ │ │── /deploy-html.yml
-│── /public 
-│ │── /assets 
-│ │ │── /images (спрайти, іконки, бекграунди 💾) 
-│ │ │── /sounds (музика та ефекти 🔊) 
-│ │ │── /styles (CSS-оформлення 🎨)
-│ │── /partials 
-│ │ │── /ui-hud.partial.html (панель гравця 🧑🏆) 
-│ │ │── /ui-profile.partial.html (панель профілю гравця  👤) 
+│── /public  
+│ │── /assets  
+│ │ │── /images # (спрайти, іконки, бекграунди 💾)  
+│ │ │── /sounds #(музика та ефекти 🔊)  
+│ │ │── /styles #(CSS-оформлення 🎨)
+│ │── /partials  
+│ │ │── /ui-hud.partial.html  # (панель гравця 🧑🏆  
+│ │ │── /ui-profile.partial.html (панель профілю гравця  👤)  
 │ │ │── /ui-store.partial.html (панель магазину 🛒)
-│ │── /utils 
-│ │ │── /notify.js(toast ✅ ) 
+│ │── /utils  
+│ │ │── /notify.js(toast ✅ )  
 │ │ │── /score.js (модуль для рахунку очок, рекордів і збереження у localStorage  🎯🏆)
-│ │ │── /sound.js (керування музикою та ефектами 🎧) 
-│ │ │── /store.js (керування сховищем гри (localStorage) 💾🔇💰)   
+│ │ │── /sound.js  (керування музикою та ефектами 🎧)  
+│ │ │── /store.js  (керування сховищем гри  (localStorage) 💾🔇💰
 │ │── index.html (точка входу 🧠)
-│ │── main.js (основна логіка запуску 🎮) 
-│ │── game.js (ініціалізація гри та керування ігровим циклом 🔁) 
-│ │── player.js (клас гравця 🚀) 
+│ │── main.js (основна логіка запуску 🎮)  
+│ │── game.js (ініціалізація гри та керування ігровим циклом 🔁)  
+│ │── player.js (клас гравця 🚀)  
 │ │── bullet.js (клас снарядів 🔫💥)
 │ │── asteroid.js (клас астероідів 🌌)
-│ │── enemy.js (клас ворогів 🔥) 
-│ │── boss.js (клас босів 👾) 
-│ │── finalBoss.js (фінальний бос ♻️) 
+│ │── enemy.js (клас ворогів 🔥)  
+│ │── boss.js (клас босів 👾)  
+│ │── finalBoss.js (фінальний бос ♻️)  
 │ │── ui.js (інтерфейс користувача: відображення очок, життя, екранів 📊🎁)
 │ │── profile.js (профіль гравця 👩‍🚀)  
-│ │── .nojekyll 
-│── /server 
-│ │── server.js (WebSockets-сервер 🌍) 
-│── package.json 
+│ │── .nojekyll  
+│── /server  
+│ │── server.js (WebSockets-сервер 🌍)  
+│── package.json  
 │── README.md
+
+```
 
 ---
 
