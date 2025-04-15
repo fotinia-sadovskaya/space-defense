@@ -10,7 +10,7 @@
 
 ```plaintext
 
-/space-shooter  
+/space-defense  
 │── /.github
 │ │── /workflows
 │ │ │── /deploy-html.yml
