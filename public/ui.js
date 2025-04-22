@@ -68,24 +68,23 @@ export function updateHUD({
   console.log(`🔁 HUD: ${weapon} | Очки: ${score} | Рекорд: ${highscore}`);
 }
 
-// ⛔ Закриття магазину ✖
+// ⛔🔧 Закриття магазину ✖
 // 🛠 Глобальні функції для HTMX
 window.closeStore = function () {
   const store = document.getElementById("store");
   if (store) store.remove(); // або store.style.display = "none";
 };
 
-// 👇 Це викликати після купівлі
+// 👇 Купівля апгрейду
 window.buyUpgrade = function (name) {
   buyUpgrade(name);
   showToast(`✅ Куплено: ${name}`);
-
-  //  alert(`✅ Куплено: ${name}`);
-  //  console.log(`✅ Куплено: ${name}`);
-
+  playSound("buy");
   updateStoreUI();
+  //  console.log(`✅ Куплено: ${name}`);
 };
 
+// 🔊 Перемикання звуку
 window.toggleSound = function () {
   toggleSound(); // оновлює store
   const isMuted = getStore().mute;
@@ -99,10 +98,3 @@ window.toggleSound = function () {
 if (isMuted()) {
   audioElement.volume = 0;
 }
-
-window.buyUpgrade = function (name) {
-  buyUpgrade(name);
-  showToast(`✅ Куплено: ${name}`);
-  playSound("buy");
-  updateStoreUI();
-};
