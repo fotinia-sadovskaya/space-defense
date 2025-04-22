@@ -95,10 +95,7 @@ window.toggleSound = function () {
   showToast(`${icon} Звук: ${isMuted ? "вимкнено" : "увімкнено"}`);
 };
 
-if (isMuted()) {
-  audioElement.volume = 0;
-}
-
+// 🎧 Вимкнення звуку при завантаженні сторінки
 const audioElement = document.getElementById("audioElement");
 if (audioElement && isMuted()) {
   audioElement.volume = 0;
