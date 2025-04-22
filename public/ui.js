@@ -98,3 +98,9 @@ window.toggleSound = function () {
 if (isMuted()) {
   audioElement.volume = 0;
 }
+
+const audioElement = document.getElementById("audioElement");
+if (audioElement && isMuted()) {
+  audioElement.volume = 0;
+}
+
