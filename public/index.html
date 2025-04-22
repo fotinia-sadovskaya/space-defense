@@ -35,7 +35,18 @@
     <script type="module" src="game.js"></script>
     <script type="module" src="main.js"></script>
     <!-- Підключення Socket.IO -->
-    <script src="/socket.io/socket.io.js"></script>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
     <script type="module" src="socket-client.js"></script>
+     <!-- ✅ Socket.io лише локально -->
+     <script>
+      if (location.hostname === "localhost") {
+        const script = document.createElement("script");
+        script.src = "/socket.io/socket.io.js"; // Тільки локально
+        script.onload = () => {
+          import("./socket-client.js").then((mod) => mod.initSocket());
+        };
+        document.head.appendChild(script);
+      }
+    </script>
   </body>
 </html>
