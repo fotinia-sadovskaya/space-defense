@@ -167,17 +167,17 @@ function gameLoop() {
   requestAnimationFrame(gameLoop);
 }
 
-// window.addEventListener("resize", () => {
-//   canvas.width = window.innerWidth;
-//   canvas.height = window.innerHeight;
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 
-//   player.resize();
+  player.resize();
 
-//   enemies.forEach((enemy) => enemy.resize?.());
-//   asteroids.forEach((asteroid) => asteroid.resize?.());
+  enemies.forEach((enemy) => enemy.resize?.());
+  asteroids.forEach((asteroid) => asteroid.resize?.());
 
-//   console.log("📱 Canvas та об'єкти адаптовані під новий розмір екрану");
-// });
+  console.log("📱 Canvas та об'єкти адаптовані під новий розмір екрану");
+});
 
 // 👾 Керування
 window.addEventListener("keydown", (event) => {
