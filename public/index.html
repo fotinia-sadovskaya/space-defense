@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Space Defense 🛡️</title>
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.png" />
+
+     <!-- Стили -->
     <link rel="stylesheet" href="assets/styles/styles.css" />
+
+    <!-- HTMX для завантаження partials -->
     <script
       src="https://unpkg.com/htmx.org@1.9.10"
       integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
@@ -14,29 +18,39 @@
   </head>
   <body>
     <canvas id="gameCanvas"></canvas>
+
+     <!-- Панель HUD -->
     <section
       id="hud-container"
       data-hx-get="partials/ui-hud.partial.html"
       data-hx-trigger="load"
       data-hx-swap="outerHTML"
     ></section>
+
+    <!-- Магазин -->
     <section
       id="store-container"
       data-hx-get="partials/ui-store.partial.html"
       data-hx-trigger="load"
       data-hx-swap="outerHTML"
     ></section>
+
+    <!-- Профіль гравця -->
     <section
       id="profile-container"
       data-hx-get="partials/ui-profile.partial.html"
       data-hx-trigger="load"
       data-hx-swap="outerHTML"
     ></section>
+
+    <!-- Основна логіка гри -->
     <script type="module" src="game.js"></script>
     <script type="module" src="main.js"></script>
+
     <!-- Підключення Socket.IO -->
     <!-- <script src="/socket.io/socket.io.js"></script> -->
-    <script type="module" src="socket-client.js"></script>
+    <!-- <script type="module" src="socket-client.js"></script> -->
+     
      <!-- ✅ Socket.io лише локально -->
      <script>
       if (location.hostname === "localhost") {
