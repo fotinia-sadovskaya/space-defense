@@ -11,7 +11,7 @@ export default class Enemy {
 
     this.image = new Image();
     this.image.src = "assets/images/enemy.png"; // Шлях до спрайта ворога
-    this.image.onload = () => console.log("🖼 Ворог завантажився успішно!");
+    this.image.onload = () => console.log("👾 Ворог завантажився успішно!");
     this.image.onerror = () =>
       console.error("❌ Помилка завантаження enemy.png!");
 

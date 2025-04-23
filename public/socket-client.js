@@ -25,12 +25,13 @@ export function initSocket() {
   if (storedName) {
     socket.emit("set-name", storedName);
   }
-}
 
-// 🛸 Наприклад, отримаємо очки іншого гравця:
-socket.on("player-score", (data) => {
-  console.log("Інший гравець має", data.score, "очок");
-});
+  //Додаткове використання socket – тільки тут!
+  // 🛸 Наприклад, отримаємо очки іншого гравця:
+  socket.on("player-score", (data) => {
+    console.log("🧑‍🚀 Інший гравець має", data.score, "очок");
+  })
+}
 
 // 📦 Можемо відправити подію на сервер
 function sendScore(score) {
