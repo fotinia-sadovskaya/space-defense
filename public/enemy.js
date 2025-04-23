@@ -1,3 +1,5 @@
+import { debugMode } from "./utils/debug.js";
+
 export default class Enemy {
   constructor(canvas, x, y) {
     this.canvas = canvas;
@@ -11,9 +13,13 @@ export default class Enemy {
 
     this.image = new Image();
     this.image.src = "assets/images/enemy.png"; // Шлях до спрайта ворога
-    this.image.onload = () => console.log("👾 Ворог завантажився успішно!");
-    this.image.onerror = () =>
-      console.error("❌ Помилка завантаження enemy.png!");
+    this.image.onload = () => {
+      if (debugMode) console.log("👾 Ворог завантажився успішно!");
+    };
+
+    this.image.onerror = () => {
+      if (debugMode) console.error("❌ Помилка завантаження enemy.png!");
+    };
 
     // Додано обробник помилки для зображення ворога
   }
@@ -28,7 +34,7 @@ export default class Enemy {
   }
 
   draw() {
-    // console.log("🎨 Малюємо ворога на позиції:", this.x, this.y);
+    if (debugMode) console.log("🎨 Малюємо ворога на позиції:", this.x, this.y);
     this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
 

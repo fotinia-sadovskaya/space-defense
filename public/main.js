@@ -1,3 +1,4 @@
+import { debugMode } from "./utils/debug.js";
 import Enemy from "./enemy.js";
 import Player from "./player.js";
 import Bullet from "./bullet.js";
@@ -67,7 +68,7 @@ document.body.addEventListener("htmx:afterSwap", (e) => {
     e.detail.target.id === "hud-container" ||
     e.detail.target.classList.contains("hud")
   ) {
-    console.log("♻️ HUD оновлено");
+    if (debugMode) console.log("♻️ HUD оновлено");
     updateHUD({
       score: currentScore,
       highscore: getHighScore(),
@@ -111,11 +112,12 @@ function spawnEnemy() {
   const x = Math.random() * (canvas.width - 50);
   const enemy = new Enemy(canvas, x, 0);
   enemies.push(enemy);
-  console.log("👾 Новий ворог створено!", {
-    x,
-    y: enemy.y,
-    total: enemies.length,
-  });
+  if (debugMode)
+    console.log("👾 Новий ворог створено!", {
+      x,
+      y: enemy.y,
+      total: enemies.length,
+    });
 }
 setInterval(spawnEnemy, 2000);
 
@@ -176,7 +178,8 @@ window.addEventListener("resize", () => {
   enemies.forEach((enemy) => enemy.resize?.());
   asteroids.forEach((asteroid) => asteroid.resize?.());
 
-  console.log("📱 Canvas та об'єкти адаптовані під новий розмір екрану");
+  if (debugMode)
+    console.log("📱 Canvas та об'єкти адаптовані під новий розмір екрану");
 });
 
 // 👾 Керування

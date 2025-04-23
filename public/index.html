@@ -4,9 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Space Defense 🛡️</title>
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.png" />
 
-     <!-- Стили -->
+    <!-- 🔍 favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+
+    <!-- 🎨 CSS Стили -->
     <link rel="stylesheet" href="assets/styles/styles.css" />
 
     <!-- HTMX для завантаження partials -->
@@ -19,7 +21,7 @@
   <body>
     <canvas id="gameCanvas"></canvas>
 
-     <!-- Панель HUD -->
+    <!-- Панель HUD -->
     <section
       id="hud-container"
       data-hx-get="partials/ui-hud.partial.html"
@@ -50,9 +52,9 @@
     <!-- Підключення Socket.IO -->
     <!-- <script src="/socket.io/socket.io.js"></script> -->
     <!-- <script type="module" src="socket-client.js"></script> -->
-     
-     <!-- ✅ Socket.io лише локально -->
-     <script>
+
+    <!-- ✅ Socket.io лише локально -->
+    <script>
       if (location.hostname === "localhost") {
         const script = document.createElement("script");
         script.src = "/socket.io/socket.io.js"; // Тільки локально

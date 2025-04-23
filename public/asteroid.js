@@ -1,3 +1,5 @@
+import { debugMode } from "./utils/debug.js";
+
 export default class Asteroid {
   constructor(canvas, x, y, speed) {
     this.canvas = canvas;
@@ -10,7 +12,9 @@ export default class Asteroid {
 
     this.image = new Image();
     this.image.src = "assets/images/asteroid.png"; // Додайте астероїд у папку images
-    this.image.onload = () => console.log("🪨 Астероїд завантажено");
+    this.image.onload = () => {
+      if (debugMode) console.log("🪨 Астероїд завантажено");
+    };
   }
 
   resize() {

@@ -1,3 +1,5 @@
+import { debugMode } from "./utils/debug.js";
+
 export default class Bullet {
   // Додаємо експортування класу
   constructor(canvas, x, y, weaponType = "normal") {
@@ -30,13 +32,13 @@ export default class Bullet {
 
   move() {
     this.y -= this.speed; // ✅ Куля має рухатись вгору (зменшуємо y)
-    console.log(`🚀 Куля рухається: ${this.y}`); // Лог перевірки
+    if (debugMode) console.log(`🚀 Куля рухається: ${this.y}`); // Лог перевірки
   }
 
   draw() {
     this.ctx.fillStyle = this.color; // Колір кулі
     this.ctx.fillRect(this.x, this.y, this.width, this.height); // Малюємо кулю
-    console.log("🎨 Малюємо кулю на позиції:", this.x, this.y); // Лог для перевірки
+    if (debugMode) console.log("🎨 Малюємо кулю на позиції:", this.x, this.y); // Лог для перевірки
   }
 
   isOutOfScreen() {
