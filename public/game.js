@@ -1,3 +1,4 @@
+import { debugMode } from "./utils/debug.js";
 import Player from "./player.js";
 import Enemy from "./enemy.js";
 import Bullet from "./bullet.js";
@@ -11,7 +12,8 @@ const ctx = canvas.getContext("2d");
 const player = new Player(canvas);
 
 document.addEventListener("keydown", (event) => {
-  console.log("🟢 Натиснута клавіша:", event.key); // ✅ Лог кожної клавіші
+  if (!event?.key) return; // ⛔ Безпечна перевірка
+  if (debugMode) console.log("🟢 Натиснута клавіша:", event.key); // ✅ Лог кожної клавіші
 
   const key = event.key.toLowerCase(); // ✅ Приводимо до нижнього регістру
 
@@ -25,7 +27,8 @@ document.addEventListener("keydown", (event) => {
     player.shoot();
   }
   if (key === "w") {
-    console.log("🔫 W натиснута – викликаємо player.changeWeapon()"); // ✅ Перевіряємо, чи сюди взагалі доходить код
+    if (debugMode)
+      console.log("🔫 W натиснута – викликаємо player.changeWeapon()"); // ✅ Перевіряємо, чи сюди взагалі доходить код
     player.changeWeapon();
   }
 });
@@ -40,13 +43,13 @@ function updateGame() {
 updateGame();
 
 async function setRandomBackground() {
-  console.log("🌌 Починаємо встановлення фону...");
+  if (debugMode) console.log("🌌 Починаємо встановлення фону...");
   try {
     const response = await fetch(
       "https://images-api.nasa.gov/search?q=galaxy&media_type=image"
     );
     const data = await response.json();
-    console.log("🔍 Відповідь API NASA:", data); // ✅ Перевіряємо структуру
+    if (debugMode) console.log("🔍 Відповідь API NASA:", data); // ✅ Перевіряємо структуру
 
     // Фільтруємо тільки якісні фото галактик та туманностей
     const images = data.collection.items.filter((item) => {
@@ -64,7 +67,7 @@ async function setRandomBackground() {
     if (images.length > 0) {
       const randomIndex = Math.floor(Math.random() * images.length);
       const imageUrl = images[randomIndex].links[0].href;
-      console.log("🌌 Випадкове зображення:", imageUrl); // ✅ Перевіряємо URL
+      if (debugMode) console.log("🌌 Випадкове зображення:", imageUrl); // ✅ Перевіряємо URL
 
       document.getElementById(
         "gameCanvas"
@@ -72,22 +75,24 @@ async function setRandomBackground() {
 
       //document.body.style.background = `url(${imageUrl}) center/cover no-repeat`; // ✅ Ставимо фон у body
     } else {
-      console.warn("⚠️ Немає відповідних зображень.");
+      if (debugMode) console.warn("⚠️ Немає відповідних зображень.");
       // Якщо не знайшли жодного зображення, можна поставити дефолтне
       document.body.style.background = `url('assets/images/default-bg.jpg') center/cover no-repeat`;
-      console.log("🌌 Використано дефолтне зображення фону.");
+      if (debugMode) console.log("🌌 Використано дефолтне зображення фону.");
     }
   } catch (error) {
-    console.error("❌ Не вдалося завантажити фон з NASA API", error);
+    if (debugMode)
+      console.error("❌ Не вдалося завантажити фон з NASA API", error);
   }
 }
 
 // 🎯 Обсервер для відстеження змін стилю canvas
 const observer = new MutationObserver(() => {
-  console.log(
-    "🎨 Canvas style змінився:",
-    document.getElementById("gameCanvas").style.background
-  );
+  if (debugMode)
+    console.log(
+      "🎨 Canvas style змінився:",
+      document.getElementById("gameCanvas").style.background
+    );
 });
 
 // Стежимо за змінами атрибуту style у canvas
