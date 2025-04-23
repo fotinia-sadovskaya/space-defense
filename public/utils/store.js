@@ -2,6 +2,7 @@
 //🎯 Покупки в магазині
 //🔇 Налаштування звуку
 //💾 Збереження стану гравця
+import { debugMode } from "./debug.js";
 
 const defaultState = {
   weapons: ["basic"],
@@ -23,7 +24,7 @@ export function buyUpgrade(upgradeName) {
   if (!store.weapons.includes(upgradeName)) {
     store.weapons.push(upgradeName);
     saveStore(store);
-    console.log("🛒 Куплено:", upgradeName);
+    if (debugMode) console.log("🛒 Куплено:", upgradeName);
   }
 }
 
@@ -32,7 +33,7 @@ export function addCoins(amount) {
   const store = getStore();
   store.coins += amount;
   saveStore(store);
-  console.log("💰 Додано монет:", amount);
+  if (debugMode) console.log("💰 Додано монет:", amount);
 }
 
 // 🔇 Звук вкл/викл
@@ -40,7 +41,7 @@ export function toggleSound() {
   const store = getStore();
   store.mute = !store.mute;
   saveStore(store);
-  console.log("🔊 Звук:", store.mute ? "вимкнено" : "увімкнено");
+  if (debugMode) console.log("🔊 Звук:", store.mute ? "вимкнено" : "увімкнено");
 }
 
 export function isMuted() {
