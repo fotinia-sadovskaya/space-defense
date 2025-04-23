@@ -1,5 +1,6 @@
 // utils/score.js — модуль для рахунку очок, рекордів і збереження
 // у localStorage для таблиці лідерів 🌟
+import { debugMode } from "./debug.js";
 
 // ✅ Отримати очки з localStorage
 export function getScore() {
@@ -18,7 +19,7 @@ export function updateScore(score) {
   const high = getHighScore();
   if (score > high) {
     localStorage.setItem("highscore", score);
-    console.log("🏆 Новий рекорд:", score);
+    if (debugMode) console.log("🏆 Новий рекорд:", score);
   }
 }
 

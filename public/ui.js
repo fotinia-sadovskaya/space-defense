@@ -1,3 +1,4 @@
+import { debugMode } from "./utils/debug.js";
 import {
   getStore,
   buyUpgrade,
@@ -29,29 +30,6 @@ export function updateStoreUI() {
 }
 
 // 🎮 Оновлення HUD (поточна зброя, очки, рекорд)
-// export function updateHUD() {
-//   const scoreEl = document.getElementById("score");
-//   const highEl = document.getElementById("highscore");
-//   const coinsEl = document.getElementById("storeCoins");
-//   const weaponEl = document.getElementById("weaponType");
-
-//   const store = JSON.parse(localStorage.getItem("store")) || {
-//     score: 0,
-//     highscore: 0,
-//     coins: 0,
-//     weapon: "normal",
-//   };
-
-//   if (scoreEl) scoreEl.textContent = store.score;
-//   if (highEl) highEl.textContent = store.highscore;
-//   if (coinsEl) coinsEl.textContent = store.coins;
-//   if (weaponEl)
-//     weaponEl.textContent = {
-//       normal: "Звичайна",
-//       strong: "Сильна",
-//       laser: "Лазер",
-//     }[store.weapon || "normal"];
-// }
 export function updateHUD({
   weapon = "Звичайна",
   score = 0,
@@ -65,7 +43,8 @@ export function updateHUD({
   if (scoreSpan) scoreSpan.textContent = score;
   if (highscoreSpan) highscoreSpan.textContent = highscore;
 
-  console.log(`🔁 HUD: ${weapon} | Очки: ${score} | Рекорд: ${highscore}`);
+  if (debugMode)
+    console.log(`🔁 HUD: ${weapon} | Очки: ${score} | Рекорд: ${highscore}`);
 }
 
 // ⛔🔧 Закриття магазину ✖
@@ -100,4 +79,3 @@ const audioElement = document.getElementById("audioElement");
 if (audioElement && isMuted()) {
   audioElement.volume = 0;
 }
-
