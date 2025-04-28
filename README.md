@@ -111,8 +111,9 @@
 
 ```bash
 npm install
-
+```
 ### Запуск WebSocket-сервера
 
 ```bash
 node server/server.js
+```
