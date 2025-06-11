@@ -1,3 +1,5 @@
+[![Deploy static content to Pages](https://github.com/fotinia-sadovskaya/space-defense/actions/workflows/static.yml/badge.svg)](https://github.com/fotinia-sadovskaya/space-defense/actions/workflows/static.yml)
+
 # Space Defense 🚀🛡️
 
 ## Опис проєкту  
