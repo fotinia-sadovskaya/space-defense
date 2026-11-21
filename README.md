@@ -145,5 +145,10 @@ GitHub Pages + GitHub Actions (deployment).
 - [ ] Final boss phases
 
 ## Run locally
+
+```bash
 npm install
-npm start   (або відкрийте public/index.html)
+npm start
+```
+
+Or open `public/index.html` in your browser.
