@@ -127,7 +127,7 @@ and fight bosses through waves of enemies.
 
 **[▶ Play online](https://fotinia-sadovskaya.github.io/space-defense/)** · Status: prototype in progress
 
-![Gameplay screenshot](public/assets/images/enemy.png)
+![Gameplay screenshot](public/assets/images/space-defense.png)
 
 ## Controls
 - Arrow keys / WASD: move
