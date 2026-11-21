@@ -119,3 +119,31 @@ npm install
 ```bash
 node server/server.js
 ```
+
+# Space Defense 🚀🛡️
+
+An arcade browser game: pilot a spaceship, destroy asteroids and enemy ships,
+and fight bosses through waves of enemies.
+
+**[▶ Play online](https://fotinia-sadovskaya.github.io/space-defense/)** · Status: prototype in progress
+
+![Gameplay screenshot](docs/screenshot.png)
+
+## Controls
+- Arrow keys / WASD: move
+- Space: shoot
+- W: switch weapon · M: open shop
+
+## Tech stack
+JavaScript (ES6, classes), HTML5 Canvas, CSS, NASA API (background), localStorage (high scores),
+GitHub Pages + GitHub Actions (deployment).
+
+## Features
+- [x] Player ship, bullets, asteroids, enemies, bosses
+- [x] Dynamic NASA background
+- [ ] Shop and upgrades
+- [ ] Final boss phases
+
+## Run locally
+npm install
+npm start   (або відкрийте public/index.html)
