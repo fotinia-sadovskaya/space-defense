@@ -146,4 +146,9 @@ GitHub Pages + GitHub Actions (deployment).
 
 ## Run locally
 
+```bash
+npm install
+npm start
+```
+
 Or open `public/index.html` in your browser.
