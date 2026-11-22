@@ -15,7 +15,7 @@
 /space-defense  
 │── /.github
 │ │── /workflows
-│ │ │── /deploy-html.yml
+│ │ │── /static.yml
 │── /public  
 │ │── /assets  
 │ │ │── /images (спрайти, іконки, бекграунди 💾)  
